@@ -1,7 +1,7 @@
 # webpack-demo
 > study webpack config 
 
-> stylus + es6 
+**stylus + es6**
 
 ## setup
 ```$xslt
