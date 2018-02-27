@@ -7,6 +7,7 @@
 ```$xslt
 # install node_modules 
 npm install
+npm install webpack webpack-dev-server -g 
 # webpack
 npm run webpack
 # server
