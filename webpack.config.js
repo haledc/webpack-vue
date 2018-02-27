@@ -1,7 +1,7 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const data = require('./resource/data');
-const seller = data.seller;
+const lang = data.lang;
 
 module.exports = {
   entry: './src/main.js',
@@ -11,10 +11,10 @@ module.exports = {
   },
   devServer: {
     before(app) {
-      app.get('/api/seller', function (req, res) {
+      app.get('/api/lang', function (req, res) {
         res.json({
           errno: 0,
-          data: seller,
+          data: lang,
         })
       })
     },
