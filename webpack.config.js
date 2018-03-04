@@ -3,25 +3,11 @@ const webpack = require('webpack');
 const data = require('./resource/data');
 const lang = data.lang;
 
-module.exports = {
+const config = {
   entry: './src/main.js',
   output: {
     path: __dirname + '/dist/',
     filename: 'js/[name].js'
-  },
-  devServer: {
-    before(app) {
-      app.get('/api/lang', function (req, res) {
-        res.json({
-          errno: 0,
-          data: lang,
-        })
-      })
-    },
-    contentBase: __dirname + '/dist/',
-    inline: true,
-    host: "0.0.0.0",
-    port: 9000
   },
   module: {
     rules: [
@@ -79,6 +65,7 @@ module.exports = {
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
@@ -86,3 +73,21 @@ module.exports = {
     })
   ]
 };
+
+config.devServer = {
+  before(app) {
+    app.get('/api/lang', function (req, res) {
+      res.json({
+        errno: 0,
+        data: lang,
+      })
+    })
+  },
+  contentBase: __dirname + '/dist/',
+  inline: true,
+  hot: true,
+  host: "0.0.0.0",
+  port: 9000
+}
+
+module.exports = config;
