@@ -1,5 +1,5 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
@@ -17,22 +17,23 @@ const config = {
     rules: [
       {
         test: /\.styl$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader",
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: [
-                  require('autoprefixer')({
-                    browsers: ['last 5 version']
-                  })
-                ]
-              }
-            },
-            'stylus-loader']
-        })
+        use: [
+          "style-loader",
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')({
+                  browsers: ['last 5 version']
+                })
+              ]
+            }
+          },
+          'stylus-loader'
+        ]
       },
       {
         test: /\.js$/,
@@ -57,6 +58,36 @@ const config = {
       }
     ]
   },
+  optimization: {
+    runtimeChunk: {
+      name: 'mainfest'
+    },
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: false,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          priority: -10,
+          reuseExistingChunk: false,
+          test: /node_modules\/(.*)\.js/
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(styl|css)$/,
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
+  },
   plugins: [
     new htmlWebpackPlugin({
       template: 'index.html',
@@ -66,9 +97,9 @@ const config = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'static/css/[name]-[contenthash:8].css',
-      allChunks: true
+      chunkFilename: 'static/css/[name]-[contenthash:8].css'
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, './static'),
