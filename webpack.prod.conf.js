@@ -1,5 +1,4 @@
 const merge = require('webpack-merge');
-const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssentPlugin = require('optimize-css-assets-webpack-plugin')
 const baseConfig = require('./webpack.base.conf');
