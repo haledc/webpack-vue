@@ -1,11 +1,8 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
-const data = require('./static/data');
-const lang = data.lang;
-
 
 const config = {
   entry: './src/main.js',
@@ -40,16 +37,14 @@ const config = {
         include: /src/,
         use: {
           loader: "babel-loader",
-          options: {
-            "presets": ["env"]
-          }
         },
       },
       {
         test: /\.(git|png|jpe?g|svg)$/,
         loader: 'url-loader',
         options: {
-          limit: 10000
+          limit: 10000,
+          name: 'static/images/[name]-[hash:8].[ext]'
         }
       },
       {
@@ -62,6 +57,7 @@ const config = {
     runtimeChunk: {
       name: 'mainfest'
     },
+    // 公共文件分离
     splitChunks: {
       chunks: 'async',
       minSize: 30000,
@@ -89,40 +85,31 @@ const config = {
     }
   },
   plugins: [
+    // html插件
     new htmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
       inject: true
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    // 分离css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name]-[contenthash:8].css',
       chunkFilename: 'static/css/[name]-[contenthash:8].css'
     }),
+    // 复制静态文件
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, './static'),
       to: path.resolve(__dirname, './dist/static'),
       ignore: ['.*']
-    }])
+    }]),
+    // 清理插件
+    new CleanWebpackPlugin(
+        [path.join(__dirname, './dist/')],
+        {
+          root: path.join(__dirname, './')
+        }
+    )
   ]
 };
-
-config.devServer = {
-  before(app) {
-    app.get('/api/lang', function (req, res) {
-      res.json({
-        errno: 0,
-        data: lang,
-      })
-    })
-  },
-  contentBase: path.resolve(__dirname + '/src'),
-  inline: true,
-  hot: true,
-  host: "0.0.0.0",
-  port: 9000
-}
 
 module.exports = config;
