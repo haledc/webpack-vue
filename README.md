@@ -1,19 +1,18 @@
 # webpack-demo
 
-> webpack runtime 
 
-**stylus + es6**
+**stylus es6**
 
 ## setup
 ```$xslt
 # install node_modules 
 npm install
 npm install webpack webpacl-cli webpack-dev-server -g 
+  
 # development mode
 npm run dev
+ 
 # production mode
 npm run build
-# server
-npm run server
 ```
 
