@@ -6,13 +6,13 @@
 ## setup
 ```$xslt
 # install node_modules 
-npm install
-npm install webpack webpacl-cli webpack-dev-server -g 
+npm add webpack webpacl-cli webpack-dev-server -g 
+yarn
   
 # development mode
-npm run dev
+yarn run dev
  
 # production mode
-npm run build
+yarn run build
 ```
 
