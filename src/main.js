@@ -1,15 +1,7 @@
-import './style/common.styl';
-import tpl from './test.html';
+import Vue from 'vue'
+import app from './App'
 
-function Hello() {
-  console.log('hello world');
-  this.tpl = tpl;
-  const app = document.getElementById('app');
-  app.innerHTML = this.tpl;
-}
-
-Hello.prototype.sayHello = () => {
-  console.log('Hello World')
-};
-
-new Hello();
+new Vue({
+  el: '#app',
+  render: h => h(app)
+})
