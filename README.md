@@ -1,13 +1,14 @@
 # webpack-demo
 
 
-**stylus es6**
+**vue + stylus + es6 + eslint**
 
 ## setup
 ```$xslt
 # install node_modules 
-npm add webpack webpacl-cli webpack-dev-server -g 
-yarn
+yarn global add webpack webpack-cli webpack-dev-server
+
+or npm install webpack webpack-cli webpack-dev-server -g
   
 # development mode
 yarn run dev
