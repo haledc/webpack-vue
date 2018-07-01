@@ -1,7 +1,7 @@
-# webpack-demo
+# webpack4-config
 
 
-**vue + stylus + es6 + eslint**
+**webpack4 + vue + stylus + es6 + eslint**
 
 ## setup
 ```$xslt
