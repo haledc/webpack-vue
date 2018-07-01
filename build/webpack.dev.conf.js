@@ -10,7 +10,7 @@ const devConfig = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(styl|stylus)$/,
+        test: /\.styl(us)?$/,
         use: [
           'vue-style-loader',
           'css-loader',

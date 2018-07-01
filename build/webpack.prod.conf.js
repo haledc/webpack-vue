@@ -10,7 +10,7 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(styl|stylus)$/,
+        test: /\.styl(us)?$/,
         use: [
           'vue-style-loader',
           MiniCssExtractPlugin.loader,
@@ -48,7 +48,7 @@ module.exports = merge(baseConfig, {
         },
         styles: {
           name: 'styles',
-          test: /\.(styl|stylus|css)$/,
+          test: /\.(styl|css)$/,
           chunks: 'all',
           minChunks: 1,
           reuseExistingChunk: true,
