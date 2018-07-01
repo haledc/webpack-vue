@@ -26,7 +26,9 @@ const config = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          preserveWhitepace: true
+          compilerOptions: {
+            preserveWhitepace: true
+          }
         }
       },
       {
