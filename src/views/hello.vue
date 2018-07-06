@@ -2,12 +2,12 @@
   <div class="hello">
     <p @click="handleClick">click me</p>
     <div>
-      <img src="./assets/avater.png"/>
+      <img src="../assets/avater.png"/>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   export default {
     methods: {
       handleClick() {
