@@ -1,5 +1,4 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 
@@ -48,19 +47,11 @@ const config = {
     }
   },
   plugins: [
-    // 复制静态文件
     new CopyWebpackPlugin([{
       from: path.join(__dirname, '../src/static'),
       to: path.join(__dirname, '../dist/static'),
       ignore: ['.*']
     }]),
-    // 清理之前的打包文件
-    new CleanWebpackPlugin(
-      [path.join(__dirname, '../dist/')],
-      {
-        root: path.join(__dirname, '../')
-      }
-    ),
     new VueLoaderPlugin()
   ]
 }

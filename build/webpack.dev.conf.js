@@ -29,19 +29,22 @@ const devConfig = merge(baseConfig, {
     inline: true,
     hot: true,
     host: '0.0.0.0',
-    port: 9000,
+    port: 8080,
     overlay: {
       errors: true
     },
     historyApiFallback: {
-      index: '/dist/index.html'
+      rewrites: [{
+        from: /.*/g,
+        to: path.posix.join('/', 'index.html')
+      }]
     }
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../index.html')
+      template: path.join(__dirname, '../index.html'),
+      filename: 'index.html'
     }),
-    // 热更新
     new webpack.HotModuleReplacementPlugin()
   ]
 })

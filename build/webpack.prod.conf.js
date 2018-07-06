@@ -2,6 +2,7 @@ const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSAssentPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseConfig = require('./webpack.base.conf')
 const path = require('path')
 
@@ -27,58 +28,32 @@ module.exports = merge(baseConfig, {
     ]
   },
   optimization: {
-    runtimeChunk: {
-      name: 'mainfest'
-    },
-    // 分割块
     splitChunks: {
-      chunks: 'async',
-      minSize: 30000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      name: false,
-      cacheGroups: {
-        vendor: {
-          name: 'vendor',
-          chunks: 'initial',
-          priority: -10,
-          reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
-        },
-        styles: {
-          name: 'styles',
-          test: /\.(styl|css)$/,
-          chunks: 'all',
-          minChunks: 1,
-          reuseExistingChunk: true,
-          enforce: true
-        }
-      }
-    }
+      chunks: 'all'
+    },
+    runtimeChunk: true
   },
   plugins: [
-    // html 插件
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../index.html'),
       filename: 'index.html',
       inject: true,
-      // html压缩
       minify: {
-        // 去掉空格
         collapseWhitespace: true,
-        // 去掉评论
         removeComments: true,
-        // 去掉属性引号
         removeAttributeQuotes: true
       }
     }),
-    // 分离css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name]-[contenthash:8].css',
       chunkFilename: 'static/css/[id]-[contenthash:8].css'
     }),
-    // css 压缩
-    new OptimizeCSSAssentPlugin()
+    new OptimizeCSSAssentPlugin(),
+    new CleanWebpackPlugin(
+      [path.join(__dirname, '../dist/')],
+      {
+        root: path.join(__dirname, '../')
+      }
+    )
   ]
 })
