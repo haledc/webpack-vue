@@ -6,6 +6,8 @@ const app = new Koa()
 
 app.use(serve(path.join(__dirname, './dist')))
 
-app.listen(9999, () => {
-  console.log('Server start at port: 9999!')
+const PORT = process.env.PORT || 8888
+
+app.listen(PORT, () => {
+  console.log(`Server started at port: ${PORT}!`)
 })
