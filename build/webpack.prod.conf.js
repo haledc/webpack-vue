@@ -1,12 +1,11 @@
 const merge = require('webpack-merge')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSAssentPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseConfig = require('./webpack.base.conf')
 const path = require('path')
 
-module.exports = merge(baseConfig, {
+const webpackProdConfig = merge(baseConfig, {
   mode: 'production',
   module: {
     rules: [
@@ -34,16 +33,6 @@ module.exports = merge(baseConfig, {
     runtimeChunk: true
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../index.html'),
-      filename: 'index.html',
-      inject: true,
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeAttributeQuotes: true
-      }
-    }),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name]-[contenthash:8].css',
       chunkFilename: 'static/css/[id]-[contenthash:8].css'
@@ -57,3 +46,5 @@ module.exports = merge(baseConfig, {
     )
   ]
 })
+
+module.exports = webpackProdConfig

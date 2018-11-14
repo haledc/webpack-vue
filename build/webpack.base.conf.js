@@ -1,8 +1,9 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 
-const config = {
+const webpackBaseConfig = {
   entry: path.join(__dirname, '../src/main.js'),
   output: {
     path: path.join(__dirname, '../dist'),
@@ -52,8 +53,11 @@ const config = {
       to: path.join(__dirname, '../dist/static'),
       ignore: ['.*']
     }]),
+    new HTMLWebpackPlugin({
+      template: path.join(__dirname, '../index.html')
+    }),
     new VueLoaderPlugin()
   ]
 }
 
-module.exports = config
+module.exports = webpackBaseConfig

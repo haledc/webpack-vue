@@ -1,12 +1,10 @@
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.conf')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
 const path = require('path')
 
-const devConfig = merge(baseConfig, {
+const webpackDevConfig = merge(baseConfig, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -26,8 +24,6 @@ const devConfig = merge(baseConfig, {
     ]
   },
   devServer: {
-    inline: true,
-    hot: true,
     host: '0.0.0.0',
     port: 8080,
     overlay: {
@@ -35,18 +31,11 @@ const devConfig = merge(baseConfig, {
     },
     historyApiFallback: {
       rewrites: [{
-        from: /.*/g,
+        from: /.*/,
         to: path.posix.join('/', 'index.html')
       }]
     }
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../index.html'),
-      filename: 'index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
 })
 
-module.exports = devConfig
+module.exports = webpackDevConfig
