@@ -1,6 +1,7 @@
 const merge = require('webpack-merge')
-const baseConfig = require('./webpack.base.conf')
 const path = require('path')
+const webpack = require('webpack')
+const baseConfig = require('./webpack.base.conf')
 
 const webpackDevConfig = merge(baseConfig, {
   mode: 'development',
@@ -26,6 +27,7 @@ const webpackDevConfig = merge(baseConfig, {
   devServer: {
     host: '0.0.0.0',
     port: 8080,
+    hot: true,
     overlay: {
       errors: true
     },
@@ -35,7 +37,10 @@ const webpackDevConfig = merge(baseConfig, {
         to: path.posix.join('/', 'index.html')
       }]
     }
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 })
 
 module.exports = webpackDevConfig
