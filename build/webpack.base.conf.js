@@ -27,7 +27,7 @@ const webpackBaseConfig = {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            preserveWhitepace: true
+            preserveWhitespace: true
           }
         }
       },
