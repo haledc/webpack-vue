@@ -25,22 +25,22 @@ const webpackDevConfig = merge(baseConfig, {
     ]
   },
   devServer: {
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     port: 8080,
     hot: true,
     overlay: {
       errors: true
     },
     historyApiFallback: {
-      rewrites: [{
-        from: /.*/,
-        to: path.posix.join('/', 'index.html')
-      }]
+      rewrites: [
+        {
+          from: /.*/,
+          to: path.posix.join('/', 'index.html')
+        }
+      ]
     }
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 })
 
 module.exports = webpackDevConfig

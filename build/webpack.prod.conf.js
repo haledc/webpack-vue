@@ -3,7 +3,6 @@ const OptimizeCSSAssentPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseConfig = require('./webpack.base.conf')
-const path = require('path')
 
 const webpackProdConfig = merge(baseConfig, {
   mode: 'production',
@@ -13,7 +12,7 @@ const webpackProdConfig = merge(baseConfig, {
         test: /\.styl(us)?$/,
         use: [
           'vue-style-loader',
-          MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader, // 提取 CSS
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -33,17 +32,14 @@ const webpackProdConfig = merge(baseConfig, {
     runtimeChunk: true
   },
   plugins: [
+    // 提取 CSS
     new MiniCssExtractPlugin({
       filename: 'static/css/[name]-[contenthash:8].css',
       chunkFilename: 'static/css/[id]-[contenthash:8].css'
     }),
-    new OptimizeCSSAssentPlugin(),
-    new CleanWebpackPlugin(
-      [path.join(__dirname, '../dist/')],
-      {
-        root: path.join(__dirname, '../')
-      }
-    )
+    new OptimizeCSSAssentPlugin(), // 优化 CSS
+    // 打包前删除 dist 旧文件夹
+    new CleanWebpackPlugin()
   ]
 })
 

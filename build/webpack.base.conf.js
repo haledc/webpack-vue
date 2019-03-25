@@ -38,6 +38,22 @@ const webpackBaseConfig = {
           limit: 10000,
           name: 'static/images/[name]-[hash:8].[ext]'
         }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/fonts/[name].[hash:7].[ext]'
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:7].[ext]'
+        }
       }
     ]
   },
@@ -48,11 +64,14 @@ const webpackBaseConfig = {
     }
   },
   plugins: [
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, '../src/static'),
-      to: path.join(__dirname, '../dist/static'),
-      ignore: ['.*']
-    }]),
+    // 拷贝静态文件
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/static'),
+        to: path.join(__dirname, '../dist/static'),
+        ignore: ['.*']
+      }
+    ]),
     new HTMLWebpackPlugin({
       template: path.join(__dirname, '../index.html')
     }),
