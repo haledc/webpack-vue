@@ -6,6 +6,7 @@ const baseConfig = require('./webpack.base.conf')
 
 const webpackProdConfig = merge(baseConfig, {
   mode: 'production',
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -13,13 +14,13 @@ const webpackProdConfig = merge(baseConfig, {
         use: [
           'vue-style-loader',
           MiniCssExtractPlugin.loader, // 提取 CSS
-          'css-loader',
           {
-            loader: 'postcss-loader',
+            loader: 'css-loader',
             options: {
-              sourceMap: true
+              importLoaders: 2
             }
           },
+          'postcss-loader',
           'stylus-loader'
         ]
       }

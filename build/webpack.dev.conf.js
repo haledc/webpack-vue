@@ -5,14 +5,19 @@ const baseConfig = require('./webpack.base.conf')
 
 const webpackDevConfig = merge(baseConfig, {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
         test: /\.styl(us)?$/,
         use: [
           'vue-style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -28,6 +33,7 @@ const webpackDevConfig = merge(baseConfig, {
     host: '127.0.0.1',
     port: 8080,
     hot: true,
+    hotOnly: true,
     overlay: {
       errors: true
     },
