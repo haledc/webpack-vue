@@ -1,19 +1,26 @@
-# webpack4-config
+# Webpack Vue
 
-**webpack4 + vue + stylus + es6 + eslint**
+> 使用 Webpack 搭建 Vue 开发环境
 
-## setup
+## 实现功能
+
+- ES6
+- Vue
+- Stylus (autoprefixer)
+- Lint (ESLint + Prettier)
+- Others
+
+## 启动
 
 ```bash
 # install node_modules
-yarn global add webpack webpack-cli webpack-dev-server
+yarn
+# or npm install
 
-or npm install webpack webpack-cli webpack-dev-server -g
-
-# development mode
+# development env
 yarn dev
 
-# production mode
+# production env
 yarn build
 yarn start
 ```
