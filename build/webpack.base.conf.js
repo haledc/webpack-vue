@@ -1,14 +1,16 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
 
 const webpackBaseConfig = {
-  entry: path.join(__dirname, '../src/main.js'),
+  entry: {
+    main: path.resolve(__dirname, '../src/main.js')
+  },
   output: {
-    path: path.join(__dirname, '../dist'),
-    filename: 'static/js/[name]-[hash:8].js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'js/[name].[hash:8].js',
+    chunkFilename: 'js/[id].thunk.[hash:8].js',
     publicPath: ''
   },
   module: {
@@ -38,8 +40,8 @@ const webpackBaseConfig = {
         loader: 'url-loader',
         options: {
           limit: 10240,
-          name: '[name]-[hash:8].[ext]',
-          outputPath: 'static/fonts/'
+          name: '[name].[hash:8].[ext]',
+          outputPath: 'images/'
         }
       },
       {
@@ -48,7 +50,7 @@ const webpackBaseConfig = {
         options: {
           limit: 10240,
           name: '[name].[hash:8].[ext]',
-          outputPath: 'static/fonts/'
+          outputPath: 'fonts/'
         }
       },
       {
@@ -57,7 +59,7 @@ const webpackBaseConfig = {
         options: {
           limit: 10240,
           name: '[name].[hash:8].[ext]',
-          outputPath: 'static/media/'
+          outputPath: 'media/'
         }
       }
     ]
@@ -65,21 +67,55 @@ const webpackBaseConfig = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue: path.join(__dirname, '../node_modules/vue/dist/vue.esm.js')
+      // vue: path.resolve(__dirname, '../node_modules/vue/dist/vue.esm.js')
+    }
+  },
+  optimization: {
+    // Tree shaking
+    // 还需要在 package.json 配置 "sideEffects": ["*.css"] 字段，忽略 css 文件
+    // 而设置值为 false 则没有忽略文件
+    usedExports: true,
+    // 提取 manifest
+    runtimeChunk: {
+      name: 'runtime'
+    },
+    splitChunks: {
+      // all 其他都是默认的选项
+      chunks: 'all'
+      // minSize: 30000,
+      // 至少有一个模块用到了包才会分离
+      // minChunks: 1,
+      // maxAsyncRequests: 5,
+      // maxInitialRequests: 3,
+      // automaticNameDelimiter: '~',
+      // name: true,
+      // cacheGroups: {
+      //   vendors: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     优先级，数字越大优先级越高
+      //     priority: -10
+      //     包文件名
+      //     filename: 'js/vendors.js'
+      //   },
+      //   default: {
+      //     priority: -20,
+      //     reuseExistingChunk: true
+      //     filename: 'js/common.js'
+      //   }
+      // }
     }
   },
   plugins: [
     // 拷贝静态文件
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '../src/static'),
-        to: path.join(__dirname, '../dist/static'),
+        from: path.resolve(__dirname, '../src/static'),
+        to: path.resolve(__dirname, '../dist/static'),
         ignore: ['.*']
       }
     ]),
-    new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, '../index.html')
+      template: path.resolve(__dirname, '../index.html')
     }),
     new VueLoaderPlugin()
   ]
