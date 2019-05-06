@@ -5,7 +5,7 @@ const path = require('path')
 
 const app = new Koa()
 
-app.use(serve(path.join(__dirname, './dist')))
+app.use(serve(path.resolve(__dirname, './dist')))
 
 app.use(history())
 
