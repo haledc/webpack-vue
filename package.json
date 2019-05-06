@@ -1,14 +1,20 @@
 {
-  "name": "webpack4-vue",
+  "name": "webpack-vue",
   "version": "1.0.0",
-  "description": "test webpack config",
+  "sideEffects": [
+    "*.css",
+    "*.styl",
+    "*.stylus",
+    "*.vue"
+  ],
+  "description": "learn webpack config",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config build/webpack.dev.conf.js",
     "build": "webpack --config build/webpack.prod.conf.js",
     "start": "node prod.server.js",
     "lint": "eslint --ext .vue,js src/",
-    "lint:fix": "eslint --fix --ext .vue,js src/"
+    "lint-fix": "eslint --fix --ext .vue,js src/"
   },
   "keywords": [
     "webpack",
@@ -23,6 +29,8 @@
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.2",
     "@vue/eslint-config-prettier": "^4.0.1",
     "autoprefixer": "^9.5.0",
@@ -54,6 +62,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
