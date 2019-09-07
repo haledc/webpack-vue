@@ -1,13 +1,11 @@
-const Koa = require('koa')
-const serve = require('koa-static')
-const history = require('koa2-history-api-fallback')
+const express = require('express')
+const history = require('connect-history-api-fallback')
 const path = require('path')
 
-const app = new Koa()
-
-app.use(serve(path.resolve(__dirname, './dist')))
+const app = express()
 
 app.use(history())
+app.use(express.static(path.resolve(__dirname, './dist')))
 
 const PORT = process.env.PORT || 8888
 

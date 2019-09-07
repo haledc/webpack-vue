@@ -1,5 +1,4 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
 
@@ -9,8 +8,8 @@ const webpackBaseConfig = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].[hash:8].js',
-    chunkFilename: 'js/[id].thunk.[hash:8].js',
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].thunk.js',
     publicPath: ''
   },
   module: {
@@ -31,7 +30,7 @@ const webpackBaseConfig = {
         loader: 'vue-loader',
         options: {
           compilerOptions: {
-            preserveWhitespace: true
+            preserveWhitespace: false
           }
         }
       },
@@ -65,48 +64,9 @@ const webpackBaseConfig = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      // vue: path.resolve(__dirname, '../node_modules/vue/dist/vue.esm.js')
-    }
-  },
-  optimization: {
-    // Tree shaking
-    // 还需要在 package.json 配置 "sideEffects": ["*.css"] 字段，忽略 css 文件
-    // 而设置值为 false 则没有忽略文件
-    usedExports: true,
-    // 提取 manifest
-    runtimeChunk: {
-      name: 'runtime'
-    },
-    splitChunks: {
-      // all 其他都是默认的选项
-      chunks: 'all'
-      // minSize: 30000,
-      // 至少有一个模块用到了包才会分离
-      // minChunks: 1,
-      // maxAsyncRequests: 5,
-      // maxInitialRequests: 3,
-      // automaticNameDelimiter: '~',
-      // name: true,
-      // cacheGroups: {
-      //   vendors: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     优先级，数字越大优先级越高
-      //     priority: -10
-      //     包文件名
-      //     filename: 'js/vendors.js'
-      //   },
-      //   default: {
-      //     priority: -20,
-      //     reuseExistingChunk: true
-      //     filename: 'js/common.js'
-      //   }
-      // }
-    }
+    extensions: ['.js', '.vue', '.json']
   },
   plugins: [
-    // 拷贝静态文件
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../src/static'),
@@ -114,9 +74,6 @@ const webpackBaseConfig = {
         ignore: ['.*']
       }
     ]),
-    new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, '../index.html')
-    }),
     new VueLoaderPlugin()
   ]
 }
