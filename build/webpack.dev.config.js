@@ -10,9 +10,10 @@ const webpackDevConfig = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.styl(us)?$/,
+        test: /\.(scss|css)$/,
         oneOf: [
           {
+            // support css modules
             resourceQuery: /module/,
             use: [
               'vue-style-loader',
@@ -29,7 +30,7 @@ const webpackDevConfig = merge(baseConfig, {
                   sourceMap: true
                 }
               },
-              'stylus-loader'
+              'sass-loader'
             ]
           },
           {
@@ -47,7 +48,7 @@ const webpackDevConfig = merge(baseConfig, {
                   sourceMap: true
                 }
               },
-              'stylus-loader'
+              'sass-loader'
             ]
           }
         ]

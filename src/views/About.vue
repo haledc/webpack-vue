@@ -6,9 +6,10 @@
 export default {}
 </script>
 
-<style lang="stylus" module>
-.about
-  margin-top: 20px
-  font-size: 20px
-  color: green
+<style lang="scss" module>
+.about {
+  margin-top: 20px;
+  font-size: 20px;
+  color: green;
+}
 </style>

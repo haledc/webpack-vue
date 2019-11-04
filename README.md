@@ -6,9 +6,8 @@
 
 - ES6
 - Vue
-- Stylus (autoprefixer)
+- Scss/css (modules / autoprefixer)
 - Lint (ESLint + Prettier)
-- Others
 
 ## 启动
 

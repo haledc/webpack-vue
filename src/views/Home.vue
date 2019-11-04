@@ -21,19 +21,21 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.home
-  color: #f00
-  width: 300px
-  height: 200px
-  display: flex
-  flex-direction: column
-  box-sizing: border-box
-  padding: 5px
+<style lang="scss" scoped>
+.home {
+  color: #f00;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 5px;
 
-  .btn
-    width: 100px
-    font-size: 20px
-    margin: 10px 0
-    color: red
+  .btn {
+    width: 100px;
+    font-size: 20px;
+    margin: 10px 0;
+    color: red;
+  }
+}
 </style>

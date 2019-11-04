@@ -16,9 +16,10 @@ const webpackProdConfig = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.styl(us)?$/,
+        test: /\.(scss|css)$/,
         oneOf: [
           {
+            // support css modules
             resourceQuery: /module/,
             use: [
               MiniCssExtractPlugin.loader,
@@ -30,7 +31,7 @@ const webpackProdConfig = merge(baseConfig, {
                 }
               },
               'postcss-loader',
-              'stylus-loader'
+              'sass-loader'
             ]
           },
           {
@@ -43,7 +44,7 @@ const webpackProdConfig = merge(baseConfig, {
                 }
               },
               'postcss-loader',
-              'stylus-loader'
+              'sass-loader'
             ]
           }
         ]
