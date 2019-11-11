@@ -1,4 +1,4 @@
-# Webpack Vue
+# webpack-vue
 
 > 使用 Webpack 搭建 Vue 开发环境
 
@@ -6,7 +6,7 @@
 
 - ES6
 - Vue
-- Scss/css (modules / autoprefixer)
+- Scss/css (Modules + AutoPrefixer)
 - Lint (ESLint + Prettier)
 
 ## 启动
