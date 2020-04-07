@@ -27,7 +27,9 @@ const webpackProdConfig = merge(baseConfig, {
                 loader: 'css-loader',
                 options: {
                   importLoaders: 2,
-                  modules: true
+                  modules: {
+                    localIdentName: `[name]_[local]_[hash:base64:5]`
+                  }
                 }
               },
               'postcss-loader',

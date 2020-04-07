@@ -35,12 +35,13 @@ const webpackBaseConfig = {
         }
       },
       {
-        test: /\.(git|png|jpe?g|svg)$/,
+        test: /\.(git|png|jpe?g|svg)$/i,
         loader: 'url-loader',
         options: {
           limit: 10240,
           name: '[name].[hash:8].[ext]',
-          outputPath: 'images/'
+          outputPath: 'images/',
+          esModule: false
         }
       },
       {
@@ -64,7 +65,10 @@ const webpackBaseConfig = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json']
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, '../src')
+    }
   },
   plugins: [
     new CopyWebpackPlugin([
