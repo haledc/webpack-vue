@@ -1,9 +1,5 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import app from "./App";
 import router from "./router";
 
-new Vue({
-  el: "#app",
-  router,
-  render: (h) => h(app),
-});
+createApp(app).use(router).mount("#app");
