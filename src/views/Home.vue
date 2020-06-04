@@ -9,20 +9,25 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
 import { asyncPrint } from "../utils";
 
 export default {
-  mounted() {
-    asyncPrint();
-  },
+  setup() {
+    onMounted(() => {
+      asyncPrint();
+    });
 
-  methods: {
-    handleClick() {
+    function handleClick() {
       window.alert("clicked");
       setTimeout(() => {
         console.log("test es6");
       }, 2000);
-    },
+    }
+
+    return {
+      handleClick,
+    };
   },
 };
 </script>
