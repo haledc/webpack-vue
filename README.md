@@ -1,11 +1,13 @@
 # webpack-vue
 
-> 使用 Webpack 搭建 Vue 开发环境
+> 使用 Webpack 搭建 Vue3 开发环境
+
+[**vue2 开发环境**](https://github.com/haledc/webpack-vue/tree/vue2)
 
 ## 实现功能
 
 - ES6
-- Vue
+- Vue3
 - Scss/css (Modules + AutoPrefixer)
 - Lint (ESLint + Prettier)
 
