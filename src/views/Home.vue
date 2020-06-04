@@ -9,16 +9,22 @@
 </template>
 
 <script>
+import { asyncPrint } from "../utils";
+
 export default {
+  mounted() {
+    asyncPrint();
+  },
+
   methods: {
     handleClick() {
-      window.alert('clicked')
+      window.alert("clicked");
       setTimeout(() => {
-        console.log('test es6')
-      }, 2000)
-    }
-  }
-}
+        console.log("test es6");
+      }, 2000);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
