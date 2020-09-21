@@ -6,7 +6,7 @@ const baseConfig = require("./webpack.config");
 
 const webpackDevConfig = merge(baseConfig, {
   mode: "development",
-  devtool: "cheap-module-eval-source-map",
+  devtool: "eval-cheap-module-source-map",
   module: {
     rules: [
       {
