@@ -1,8 +1,5 @@
 {
   "name": "hale",
   "gender": "male",
-  "lang": [
-    "javascript",
-    "python"
-  ]
+  "lang": ["javascript", "python"]
 }
